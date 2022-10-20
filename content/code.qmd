@@ -1,0 +1,29 @@
+---
+title: Rendering with Code
+---
+
+You can have code (R, Python or Julia) in your qmd file. You will need to have these installed on your local computer, but presumably you do already if you are adding code to your qmd files.
+
+```{r echo=TRUE}
+ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+weight <- c(ctl, trt)
+lm(weight ~ group)
+```
+
+
+
+
+## Modify the GitHub Action
+
+You will need to change the GitHub Action in `.github/workflows` to install these and any needed packages in order for GitHub to be able to render your webpage. The section of the GitHub Action that does this has been commented out, so uncomment it.
+
+If getting the GitHub Action to work is too much hassle (and that definitely happens), you can alway render locally and publish to the `gh-pages` branch. If you do this, make sure to delete or rename the GitHub Action to something like
+```
+render-and-publish.old_yml
+```
+so GitHub does not keep trying to run it. Nothing bad will happen if you don't do this, but if you are not using the action (because it keeps failing), then you don't need GitHub to run it.
+
+## Render locally and publish to gh-pages branch
+
